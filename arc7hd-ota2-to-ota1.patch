@@ -1,0 +1,500 @@
+diff --git a/arch/arm/mach-tegra/board-cardhu.c b/arch/arm/mach-tegra/board-cardhu.c
+index 96da125..5d7cc46 100644
+--- a/arch/arm/mach-tegra/board-cardhu.c
++++ b/arch/arm/mach-tegra/board-cardhu.c
+@@ -87,62 +87,46 @@ extern int pcb_ver;
+ #define PCB_SB 1
+ #ifdef CONFIG_TEGRA_THERMAL_THROTTLE
+ static struct throttle_table throttle_freqs_tj[] = {
+-	      /*    CPU,    CBUS,    SCLK,     EMC */
+-	      { 1500000,  NO_CAP,  NO_CAP,  NO_CAP },
+-	      { 1400000,  NO_CAP,  NO_CAP,  NO_CAP },
+-	      { 1300000,  NO_CAP,  NO_CAP,  NO_CAP },
+-	      { 1150000,  NO_CAP,  NO_CAP,  NO_CAP },
+-	      { 1000000,  NO_CAP,  NO_CAP,  NO_CAP },
+-	      { 1000000,  NO_CAP,  NO_CAP,  NO_CAP },
+-	      { 1000000,  NO_CAP,  NO_CAP,  NO_CAP },
+-	      {  910000,  NO_CAP,  NO_CAP,  NO_CAP },
+-	      {  910000,  NO_CAP,  NO_CAP,  NO_CAP },
+-	      {  910000,  NO_CAP,  NO_CAP,  NO_CAP },
+-	      {  760000,  NO_CAP,  NO_CAP,  NO_CAP },
+-	      {  760000,  NO_CAP,  NO_CAP,  NO_CAP },
+-	      {  760000,  NO_CAP,  NO_CAP,  NO_CAP },
+-	      {  620000,  NO_CAP,  NO_CAP,  NO_CAP },
+-	      {  620000,  NO_CAP,  NO_CAP,  NO_CAP },
+-	      {  620000,  NO_CAP,  NO_CAP,  NO_CAP },
+-	      {  620000,  484000,  NO_CAP,  NO_CAP },
+-	      {  475000,  484000,  NO_CAP,  NO_CAP },
+-	      {  475000,  484000,  NO_CAP,  NO_CAP },
+-	      {  475000,  437000,  266666,  400000 },
+-	      {  475000,  437000,  266666,  400000 },
+-	      {  475000,  437000,  204000,  400000 },
+-	      {  475000,  247000,  136000,  204000 },
++              /*    CPU,    CBUS,    SCLK,     EMC */
++              { 1150000,  NO_CAP,  NO_CAP,  NO_CAP },
++              { 1000000,  NO_CAP,  NO_CAP,  NO_CAP },
++              { 1000000,  NO_CAP,  NO_CAP,  NO_CAP },
++              { 1000000,  NO_CAP,  NO_CAP,  NO_CAP },
++              {  910000,  NO_CAP,  NO_CAP,  NO_CAP },
++              {  910000,  NO_CAP,  NO_CAP,  NO_CAP },
++              {  910000,  NO_CAP,  NO_CAP,  NO_CAP },
++              {  760000,  NO_CAP,  NO_CAP,  NO_CAP },
++              {  760000,  NO_CAP,  NO_CAP,  NO_CAP },
++              {  760000,  NO_CAP,  NO_CAP,  NO_CAP },
++              {  620000,  NO_CAP,  NO_CAP,  NO_CAP },
++              {  620000,  NO_CAP,  NO_CAP,  NO_CAP },
++              {  620000,  484000,  NO_CAP,  NO_CAP },
++              {  620000,  484000,  NO_CAP,  400000 },
++              {  475000,  484000,  NO_CAP,  400000 },
++              {  475000,  484000,  NO_CAP,  400000 },
++              {  475000,  437000,  266666,  400000 },
++              {  475000,  437000,  266666,  400000 },
++              {  475000,  437000,  204000,  400000 },
++              {  475000,  247000,  136000,  204000 },
+ };
+ #endif
+ 
+ #ifdef CONFIG_TEGRA_SKIN_THROTTLE
+ static struct throttle_table throttle_freqs_tskin[] = {
+-	      /*    CPU,    CBUS,    SCLK,     EMC */
+-	      { 1500000,  NO_CAP,  NO_CAP,  NO_CAP },
+-	      { 1400000,  NO_CAP,  NO_CAP,  NO_CAP },
+-	      { 1300000,  NO_CAP,  NO_CAP,  NO_CAP },
+-	      { 1150000,  NO_CAP,  NO_CAP,  NO_CAP },
+-	      { 1000000,  NO_CAP,  NO_CAP,  NO_CAP },
+-	      { 1000000,  NO_CAP,  NO_CAP,  NO_CAP },
+-	      { 1000000,  NO_CAP,  NO_CAP,  NO_CAP },
+-	      {  910000,  NO_CAP,  NO_CAP,  NO_CAP },
+-	      {  910000,  NO_CAP,  NO_CAP,  NO_CAP },
+-	      {  910000,  NO_CAP,  NO_CAP,  NO_CAP },
+-	      {  760000,  NO_CAP,  NO_CAP,  NO_CAP },
+-	      {  760000,  NO_CAP,  NO_CAP,  NO_CAP },
+-	      {  760000,  NO_CAP,  NO_CAP,  NO_CAP },
+-	      {  760000,  NO_CAP,  NO_CAP,  NO_CAP },
+-	      {  620000,  NO_CAP,  NO_CAP,  NO_CAP },
+-	      {  620000,  NO_CAP,  NO_CAP,  NO_CAP },
+-	      {  620000,  NO_CAP,  NO_CAP,  NO_CAP },
+-	      {  620000,  NO_CAP,  NO_CAP,  NO_CAP },
+-	      {  620000,  484000,  NO_CAP,  NO_CAP },
+-	      {  475000,  484000,  NO_CAP,  NO_CAP },
+-	      {  475000,  484000,  NO_CAP,  400000 },
+-	      {  475000,  484000,  NO_CAP,  400000 },
+-	      {  475000,  437000,  266666,  400000 },
+-	      {  475000,  437000,  266666,  400000 },
+-	      {  475000,  437000,  204000,  400000 },
+-	      {  475000,  247000,  136000,  204000 },
++              /*    CPU,    CBUS,    SCLK,     EMC */
++              { 1115000,  NO_CAP,  NO_CAP,  NO_CAP },
++              { 1000000,  NO_CAP,  NO_CAP,  NO_CAP },
++              {  910000,  NO_CAP,  NO_CAP,  NO_CAP },
++              {  760000,  NO_CAP,  NO_CAP,  NO_CAP },
++              {  760000,  NO_CAP,  NO_CAP,  NO_CAP },
++              {  760000,  484000,  NO_CAP,  NO_CAP },
++              {  760000,  484000,  NO_CAP,  400000 },
++              {  620000,  437000,  NO_CAP,  400000 },
++              {  620000,  437000,  NO_CAP,  400000 },
++              {  620000,  400000,  266666,  400000 },
++              {  620000,  400000,  266666,  400000 },
++              {  620000,  352000,  204000,  400000 },
++              {  620000,  304000,  136000,  400000 },
+ };
+ #endif
+ 
+@@ -230,9 +214,9 @@ static struct tegra_thermal_data thermal_data = {
+ #ifdef CONFIG_TEGRA_SKIN_THROTTLE
+ 	.skin_device_id = THERMAL_DEVICE_ID_SKIN,
+ 	.temp_throttle_skin = 45000,
+-	.tc1_skin = 7,
++	.tc1_skin = 10,
+ 	.tc2_skin = 1,
+-	.passive_delay_skin = 7000,
++	.passive_delay_skin = 10000,
+ 
+ 	.skin_temp_offset = 5923,
+ 	.skin_period = 1100,
+diff --git a/drivers/input/keyboard/gpio_keys.c b/drivers/input/keyboard/gpio_keys.c
+index cfa752a..4354a9e 100644
+--- a/drivers/input/keyboard/gpio_keys.c
++++ b/drivers/input/keyboard/gpio_keys.c
+@@ -352,7 +352,7 @@ static void gpio_keys_gpio_report_event(struct gpio_button_data *bdata)
+ 	unsigned int type = button->type ?: EV_KEY;
+ 	int state = (gpio_get_value_cansleep(button->gpio) ? 1 : 0) ^ button->active_low;
+ 
+-	if (skip_pwr_event && button->code == KEY_POWER)
++	if (skip_pwr_event && (button->code == KEY_POWER || button->code == SW_LID))
+ 		return;
+ 
+ 	if (type == EV_ABS) {
+diff --git a/drivers/net/wireless/bcmdhd/dhd_linux.c b/drivers/net/wireless/bcmdhd/dhd_linux.c
+index 251c437..dbc7cf8 100755
+--- a/drivers/net/wireless/bcmdhd/dhd_linux.c
++++ b/drivers/net/wireless/bcmdhd/dhd_linux.c
+@@ -633,7 +633,7 @@ dhd_dynamic_dtim_skip_release(dhd_pub_t *dhdp)
+ 
+ static int dhd_set_suspend(int value, dhd_pub_t *dhd)
+ {
+-	int power_mode = PM_MAX;
++	int power_mode = PM_FAST;
+ 	/* wl_pkt_filter_enable_t	enable_parm; */
+ 	char iovbuf[32];
+ 	int bcn_li_dtim = 3;
+diff --git a/drivers/power/bq27541_battery.c b/drivers/power/bq27541_battery.c
+index 2edd61c..a8a3dd2 100644
+--- a/drivers/power/bq27541_battery.c
++++ b/drivers/power/bq27541_battery.c
+@@ -49,6 +49,8 @@ struct bq27x00_access_methods {
+ 	int (*read)(struct bq27x00_device_info *di, u8 reg, bool single);
+ 	int (*ctrl_read)(struct bq27x00_device_info *di, u8 ctrl_reg,
+ 				u16 ctrl_func_reg);
++	int (*ctrl_write)(struct bq27x00_device_info *di, u8 ctrl_reg, u16 ctrl_func_reg,
++				u16 val,bool single);
+ 	int (*write)(struct bq27x00_device_info *di, u8 reg, u16 val,
+ 				bool single);
+ };
+@@ -103,7 +105,9 @@ extern bool system_suspend;
+ extern void report_power_event(void);
+ int capacity_is_low=0;
+ int CHARGER_STAT_GPIO;
++int g_status=0;
+ int g_capacity=0;
++bool ac_status = false;
+ 
+ #define DEBUG
+ 
+@@ -150,6 +154,7 @@ int g_capacity=0;
+ #define BQ27510_POWER_AVG		0x24
+ 
+ /* bq27510-g2 control register sub-commands*/
++#define BQ27510_CNTL_STATUS	       0x0000
+ #define BQ27510_CNTL_DEVICE_TYPE	0x0001
+ #define BQ27510_CNTL_SET_SLEEP		0x0013
+ #define BQ27510_CNTL_CLEAR_SLEEP	0x0014
+@@ -157,6 +162,8 @@ int g_capacity=0;
+ /* bq27x00 requires 3 to 4 second to update charging status */
+ #define CHARGING_STATUS_UPDATE_DELAY_SECS	4
+ 
++#define TAPER_CURRENT	80
++
+ static enum power_supply_property bq27x00_battery_props[] = {
+ 	POWER_SUPPLY_PROP_STATUS,
+ 	POWER_SUPPLY_PROP_PRESENT,
+@@ -223,6 +230,17 @@ static inline int bq27x00_write(struct bq27x00_device_info *di, u8 reg,
+ 	return result;
+ }
+ 
++static inline int bq27x00_ctrl_write(struct bq27x00_device_info *di, u8 ctrl_reg,
++	 u8 ctrl_func_reg, u16 val, bool single)
++{
++	int result;
++
++	mutex_lock(&di->io_lock);
++	result = di->bus.ctrl_write(di, ctrl_reg, ctrl_func_reg, val, single);
++	mutex_unlock(&di->io_lock);
++
++	return result;
++}
+ static int bq27510_battery_health(struct bq27x00_device_info *di,
+ 				union power_supply_propval *val)
+ {
+@@ -248,6 +266,79 @@ static int bq27510_battery_health(struct bq27x00_device_info *di,
+ 	return -1;
+ }
+ 
++static int modify_taper_current(struct bq27x00_device_info *di)
++{
++	int val = 0;
++	int ret;
++	u8 OLD_CHKSUM = 0;
++	u8 NEW_CHKSUM = 0;
++	u8 TMP_CHKSUM = 0;
++	u8 OLD_TAPER_CURRENT_BYTES = 0;
++	u8 NEW_TAPER_CURRENT_BYTES = TAPER_CURRENT;	
++
++	ret = bq27x00_ctrl_write(di, BQ27510_CNTL, BQ27510_CNTL_STATUS, 0xB0F4, false);
++	ret = bq27x00_write(di, BQ27510_CNTL, 0x100C, false);
++
++
++//	val = bq27x00_ctrl_read(di, BQ27510_CNTL, BQ27510_CNTL_STATUS);
++
++//	dev_info(di->dev, "BQ27510_CNTL_STATUS = 0x%x \n",val);
++	msleep(10);
++	//check taper current
++	ret = bq27x00_ctrl_write(di, BQ27510_CNTL, 0x61, 0x00, false);
++	msleep(10);
++	ret = bq27x00_write(di, 0x3E, 0x24, false);
++	msleep(10);
++	ret = bq27x00_write(di, 0x3F, 0x00, false);
++	msleep(10);
++	val = bq27x00_read(di, 0x40, false);
++	val = val >> 8;
++	dev_info(di->dev, "old taper current = %d \n",val);
++	OLD_TAPER_CURRENT_BYTES = val;
++
++	if(OLD_TAPER_CURRENT_BYTES != NEW_TAPER_CURRENT_BYTES)
++	{
++		dev_info(di->dev, "taper current != %d \n",NEW_TAPER_CURRENT_BYTES);		
++
++		OLD_CHKSUM = bq27x00_read(di, 0x60, false);
++//		dev_info(di->dev, "old_chksum = 0x%x \n",OLD_CHKSUM);
++
++		ret = bq27x00_write(di, 0x40, 0x00, false);
++		ret = bq27x00_write(di, 0x41, NEW_TAPER_CURRENT_BYTES, false);
++
++		TMP_CHKSUM = 0xFF - OLD_CHKSUM;
++		TMP_CHKSUM = TMP_CHKSUM - OLD_TAPER_CURRENT_BYTES +
++		NEW_TAPER_CURRENT_BYTES;
++		NEW_CHKSUM = 0xFF -TMP_CHKSUM;
++//		dev_info(di->dev, "TMP_CHKSUM = 0x%x \n",TMP_CHKSUM);
++//		dev_info(di->dev, "NEW_CHKSUM = 0x%x \n",NEW_CHKSUM);
++
++		ret = bq27x00_write(di, 0x60, NEW_CHKSUM, false);
++
++		ret = bq27x00_ctrl_write(di, BQ27510_CNTL, 0x61, 0x00, false);
++
++		ret = bq27x00_write(di, 0x3E, 0x24, false);
++
++		ret = bq27x00_write(di, 0x3F, 0x00, false);
++		val = bq27x00_read(di, 0x40, false);
++		dev_info(di->dev, "new taper current = %d \n",val>>8);			
++	}
++	else
++		dev_info(di->dev, "taper current = 80 \n");	
++
++	ret = bq27x00_ctrl_write(di, BQ27510_CNTL, BQ27510_CNTL_STATUS, 0x21, false);
++//	msleep(100);
++//	val = bq27x00_ctrl_read(di, BQ27510_CNTL, BQ27510_CNTL_STATUS);
++
++//	dev_info(di->dev, "BQ27510_CNTL_STATUS = 0x%x \n",val);
++
++	ret = bq27x00_ctrl_write(di, BQ27510_CNTL, BQ27510_CNTL_STATUS, 0x41, false);
++//	msleep(10000);
++//	val = bq27x00_ctrl_read(di, BQ27510_CNTL, BQ27510_CNTL_STATUS);
++
++//	dev_info(di->dev, "BQ27510_CNTL_STATUS = 0x%x \n",val);
++
++}
+ /*
+  * Return the battery Relative State-of-Charge
+  * Or < 0 if something fails.
+@@ -264,8 +355,16 @@ static int bq27x00_battery_read_rsoc(struct bq27x00_device_info *di)
+ 	if (rsoc < 0)
+ 		dev_dbg(di->dev, "error reading relative State-of-Charge\n");
+ 
++	ac_status = (ac_is_online||usb_running);
+ 	g_capacity = rsoc;
+ 	
++	if(rsoc == 100)
++	{
++		if(ac_status == true)
++			if(g_status != POWER_SUPPLY_STATUS_FULL) 
++				rsoc = 99;
++	}
++	
+ 	return rsoc;
+ }
+ 
+@@ -576,10 +675,12 @@ static int bq27x00_battery_status(struct bq27x00_device_info *di,
+ {
+ 	int status;
+ 
++	ac_status = (ac_is_online||usb_running);
++
+ 	if ((di->chip == BQ27500) || (di->chip == BQ27510) || (di->chip == BQ27541)) {
+ 		if(pcb_ver != 1)
+ 		{
+-			if ((di->cache.flags & BQ27500_FLAG_FC)||(g_capacity == 100))
++			if ((di->cache.flags & BQ27500_FLAG_FC)&&(ac_status)&&(g_capacity==100))
+ 				status = POWER_SUPPLY_STATUS_FULL;
+ 			else if (ac_is_online||usb_running)
+ 				status = POWER_SUPPLY_STATUS_CHARGING;
+@@ -588,7 +689,7 @@ static int bq27x00_battery_status(struct bq27x00_device_info *di,
+ 		}
+ 		else
+ 		{
+-			if ((di->cache.flags & BQ27500_FLAG_FC)||(g_capacity == 100))
++			if ((di->cache.flags & BQ27500_FLAG_FC)&&(ac_status)&&(g_capacity==100))
+ 				status = POWER_SUPPLY_STATUS_FULL;
+ 			else if (gpio_get_value(CHARGER_STAT_GPIO))
+ 			{
+@@ -610,6 +711,8 @@ static int bq27x00_battery_status(struct bq27x00_device_info *di,
+ 			status = POWER_SUPPLY_STATUS_DISCHARGING;
+ 	}
+ 
++	g_status = status;
++
+ 	val->intval = status;
+ 
+ 	return 0;
+@@ -1005,6 +1108,33 @@ static int bq27x00_ctrl_read_i2c(struct bq27x00_device_info *di,
+ 	return ret;
+ }
+ 
++static int bq27x00_ctrl_write_i2c(struct bq27x00_device_info *di,
++					u8 ctrl_reg, u16 ctrl_func_reg, u16 val)
++{
++	int ret;
++
++	ret = bq27x00_write_i2c(di, ctrl_reg, ctrl_func_reg, false);
++	
++	if (ret < 0) {
++		dev_err(di->dev, "write failure\n");
++		return ret;
++	}
++
++	if(retry_flag)
++		msleep(10);
++		
++	msleep(1);
++	
++	ret = bq27x00_write_i2c(di, ctrl_reg, val, false);
++	
++	if (ret < 0) {
++		dev_err(di->dev, "read failure\n");
++		return ret;
++	}
++
++	return ret;
++}
++
+ static int __devinit bq27x00_battery_probe(struct i2c_client *client,
+ 				 const struct i2c_device_id *id)
+ {
+@@ -1056,6 +1186,7 @@ static int __devinit bq27x00_battery_probe(struct i2c_client *client,
+ 	di->bat.name = name;
+ 	di->bus.read = &bq27x00_read_i2c;
+ 	di->bus.ctrl_read = &bq27x00_ctrl_read_i2c;
++	di->bus.ctrl_write = &bq27x00_ctrl_write_i2c;
+ 	di->bus.write = &bq27x00_write_i2c;
+ 
+ 	i2c_set_clientdata(client, di);
+@@ -1098,6 +1229,8 @@ Retry:
+ 	retry_flag = 0;
+ 	RetryTimes = 0;
+ 
++	modify_taper_current(di);
++
+ 	retval = bq27x00_powersupply_init(di);
+ 	if (retval < 0)
+ 		goto batt_failed_3;
+diff --git a/drivers/power/smb347-charger.c b/drivers/power/smb347-charger.c
+index a880842..a5c6495 100644
+--- a/drivers/power/smb347-charger.c
++++ b/drivers/power/smb347-charger.c
+@@ -812,6 +812,14 @@ static int __devinit smb347_probe(struct i2c_client *client,
+ 		goto regulator_error;
+ 	}
+ 
++
++	//modify Termination Current to 50mA
++	/*Enable volatile writes to registers*/
++	ret = smb347_volatile_writes(client, SMB347_ENABLE_WRITE);
++	ret = smb347_write(client, SMB347_CHARGE, 0x91);
++	/* Disable volatile writes to registers */
++	ret = smb347_volatile_writes(client, SMB347_DISABLE_WRITE);
++
+ 	charger->is_otg_enabled = 0;
+ 
+ 	charger->reg_desc.name  = "vbus_charger";
+diff --git a/drivers/sysinfo/sysinfo.c b/drivers/sysinfo/sysinfo.c
+index 9078baa..e4328be 100644
+--- a/drivers/sysinfo/sysinfo.c
++++ b/drivers/sysinfo/sysinfo.c
+@@ -20,7 +20,7 @@
+ #include <linux/seq_file.h>
+ #include <../gpio-names.h>
+ 
+-#define KAREN_KERNEL_VERSION "K01.28.20131009"
++#define KAREN_KERNEL_VERSION "K01.32.20131106"
+ #define MANUFACTURER  "Wistron"
+ const char *pcb_ver_name[4]={"SA","SB","SC","-1"};
+ 
+diff --git a/sound/soc/codecs/rt5639.c b/sound/soc/codecs/rt5639.c
+index 8cf48c5..45eb3f8 100644
+--- a/sound/soc/codecs/rt5639.c
++++ b/sound/soc/codecs/rt5639.c
+@@ -66,6 +66,7 @@ static struct rt5639_init_reg init_list[] = {
+ 	{RT5639_PRIV_DATA	, 0x0804},
+ 	/*playback*/
+ //	{RT5639_STO_DAC_MIXER	, 0x042c},//Dig inf 1 -> Sto DAC mixer -> DACL
++	{RT5639_STO_DAC_MIXER   , 0x1414},//Dig inf 1 -> Sto DAC mixer -> DACL
+ 	{RT5639_OUT_L3_MIXER	, 0x01fe},//DACL1 -> OUTMIXL
+ 	{RT5639_OUT_R3_MIXER	, 0x01fe},//DACR1 -> OUTMIXR
+ 	{RT5639_HP_VOL		, 0x8989},//OUTMIX -> HPVOL
+@@ -2988,7 +2989,7 @@ static int rt5639_probe(struct snd_soc_codec *codec)
+ 	int ret;
+ 
+ 	pr_info("Codec driver version %s\n", VERSION);
+-
++	codec->dapm.idle_bias_off = 1;
+ 	ret = snd_soc_codec_set_cache_io(codec, 8, 16, SND_SOC_I2C);
+ 	if (ret != 0) {
+ 		dev_err(codec->dev, "Failed to set cache I/O: %d\n", ret);
+diff --git a/sound/soc/soc-dapm.c b/sound/soc/soc-dapm.c
+index ffb6af5..56cf89c 100644
+--- a/sound/soc/soc-dapm.c
++++ b/sound/soc/soc-dapm.c
+@@ -1292,7 +1292,8 @@ static int dapm_power_widgets(struct snd_soc_dapm_context *dapm, int event)
+ 		if (d->target_bias_level > bias)
+ 			bias = d->target_bias_level;
+ 	list_for_each_entry(d, &card->dapm_list, list)
+-		d->target_bias_level = bias;
++		if (!d->idle_bias_off)
++			d->target_bias_level = bias;
+ 
+ 
+ 	/* Run all the bias changes in parallel */
+diff --git a/sound/soc/tegra/tegra_rt5640.c b/sound/soc/tegra/tegra_rt5640.c
+index f79c5f7..6ef236e 100644
+--- a/sound/soc/tegra/tegra_rt5640.c
++++ b/sound/soc/tegra/tegra_rt5640.c
+@@ -636,15 +636,41 @@ static struct snd_soc_dai_link tegra_rt5640_dai[] = {
+ static int tegra_rt5640_resume_pre(struct snd_soc_card *card)
+ {
+ 	int val;
++	int ret;
++	struct tegra_rt5640 *machine = snd_soc_card_get_drvdata(card);
++	struct tegra_asoc_platform_data *pdata;
+ 	struct snd_soc_jack_gpio *gpio = &tegra_rt5640_hp_jack_gpio;
++
++    pdata = machine->pdata;
++
+ 	if (gpio_is_valid(gpio->gpio)) {
+ 		val = gpio_get_value(gpio->gpio);
+ 		val = gpio->invert ? !val : val;
+ 		snd_soc_jack_report(gpio->jack, val, gpio->report);
+ 	}
++	ret = gpio_direction_output(pdata->gpio_ldo1_en, 1);
++	if (ret)	
++    	printk("%s Fail gpio_direction AUDIO_LDO1\n", __func__);
++    else
++    {
++    	printk("%s gpio_ldo1_en high\n", __func__);
++    	msleep(400);
++    }
+ 	return 0;
+ }
+-
++static int tegra_rt5640_suspend_post(struct snd_soc_card *card)
++{
++	int ret;
++	struct tegra_rt5640 *machine = snd_soc_card_get_drvdata(card);
++	struct tegra_asoc_platform_data *pdata;
++	pdata = machine->pdata;
++	ret = gpio_direction_output(pdata->gpio_ldo1_en, 0);
++	if (ret)	
++    	printk("%s Fail gpio_direction AUDIO_LDO1\n", __func__);
++    else
++    	printk("%s gpio_ldo1_en low\n", __func__);
++    return 0;
++}
+ static int tegra_rt5640_set_bias_level(struct snd_soc_card *card,
+ 	struct snd_soc_dapm_context *dapm, enum snd_soc_bias_level level)
+ {
+@@ -680,6 +706,7 @@ static struct snd_soc_card snd_soc_tegra_rt5640 = {
+ 	.name = "tegra-rt5640",
+ 	.dai_link = tegra_rt5640_dai,
+ 	.num_links = ARRAY_SIZE(tegra_rt5640_dai),
++	.suspend_post = tegra_rt5640_suspend_post,
+ 	.resume_pre = tegra_rt5640_resume_pre,
+ 	.set_bias_level = tegra_rt5640_set_bias_level,
+ 	.set_bias_level_post = tegra_rt5640_set_bias_level_post,
