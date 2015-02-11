@@ -1,0 +1,66 @@
+diff --git a/drivers/power/bq27541_battery.c b/drivers/power/bq27541_battery.c
+index a8a3dd2..57105b7 100644
+--- a/drivers/power/bq27541_battery.c
++++ b/drivers/power/bq27541_battery.c
+@@ -322,17 +322,23 @@ static int modify_taper_current(struct bq27x00_device_info *di)
+ 		ret = bq27x00_write(di, 0x3F, 0x00, false);
+ 		val = bq27x00_read(di, 0x40, false);
+ 		dev_info(di->dev, "new taper current = %d \n",val>>8);			
++		ret = bq27x00_ctrl_write(di, BQ27510_CNTL, BQ27510_CNTL_STATUS, 0x21, false);		
++		ret = bq27x00_ctrl_write(di, BQ27510_CNTL, BQ27510_CNTL_STATUS, 0x41, false);		
+ 	}
+ 	else
+-		dev_info(di->dev, "taper current = 80 \n");	
++	{
++		dev_info(di->dev, "taper current = %d \n",OLD_TAPER_CURRENT_BYTES);	
++		ret = bq27x00_ctrl_write(di, BQ27510_CNTL, BQ27510_CNTL_STATUS, 0x21, false);
++		ret = bq27x00_ctrl_write(di, BQ27510_CNTL, BQ27510_CNTL_STATUS, 0x20, false);
++	}	
+ 
+-	ret = bq27x00_ctrl_write(di, BQ27510_CNTL, BQ27510_CNTL_STATUS, 0x21, false);
++//	ret = bq27x00_ctrl_write(di, BQ27510_CNTL, BQ27510_CNTL_STATUS, 0x21, false);
+ //	msleep(100);
+ //	val = bq27x00_ctrl_read(di, BQ27510_CNTL, BQ27510_CNTL_STATUS);
+ 
+ //	dev_info(di->dev, "BQ27510_CNTL_STATUS = 0x%x \n",val);
+ 
+-	ret = bq27x00_ctrl_write(di, BQ27510_CNTL, BQ27510_CNTL_STATUS, 0x41, false);
++//	ret = bq27x00_ctrl_write(di, BQ27510_CNTL, BQ27510_CNTL_STATUS, 0x41, false);
+ //	msleep(10000);
+ //	val = bq27x00_ctrl_read(di, BQ27510_CNTL, BQ27510_CNTL_STATUS);
+ 
+diff --git a/drivers/sysinfo/sysinfo.c b/drivers/sysinfo/sysinfo.c
+index e4328be..dfdef2c 100644
+--- a/drivers/sysinfo/sysinfo.c
++++ b/drivers/sysinfo/sysinfo.c
+@@ -20,7 +20,7 @@
+ #include <linux/seq_file.h>
+ #include <../gpio-names.h>
+ 
+-#define KAREN_KERNEL_VERSION "K01.32.20131106"
++#define KAREN_KERNEL_VERSION "K01.33.20131113"
+ #define MANUFACTURER  "Wistron"
+ const char *pcb_ver_name[4]={"SA","SB","SC","-1"};
+ 
+diff --git a/sound/soc/codecs/rt5639.c b/sound/soc/codecs/rt5639.c
+index 45eb3f8..2390152 100644
+--- a/sound/soc/codecs/rt5639.c
++++ b/sound/soc/codecs/rt5639.c
+@@ -1406,13 +1406,13 @@ static int rt5639_spk_event(struct snd_soc_dapm_widget *w,
+ 			RT5639_PWR_CLS_D, RT5639_PWR_CLS_D);
+ 		rt5639_index_update_bits(codec,
+ 			RT5639_CLSD_INT_REG1, 0xf000, 0xf000);
+-		snd_soc_update_bits(codec, RT5639_SPK_VOL,
+-			RT5639_L_MUTE | RT5639_R_MUTE, 0);
++		snd_soc_update_bits(codec, RT5639_EQ_CTRL2,
++			RT5639_EQ_HPF2_MASK, RT5639_EQ_HPF2_EN);
+ 		snd_soc_update_bits(codec, RT5639_EQ_CTRL1,
+ 			RT5639_EQ_UPD | RT5639_EQ_CD_MASK, 
+ 			RT5639_EQ_UPD |	RT5639_EQ_CD_EN);			
+-		snd_soc_update_bits(codec, RT5639_EQ_CTRL2,
+-			RT5639_EQ_HPF2_MASK, RT5639_EQ_HPF2_EN);
++		snd_soc_update_bits(codec, RT5639_SPK_VOL,
++			RT5639_L_MUTE | RT5639_R_MUTE, 0);
+ 		break;
+ 
+ 	case SND_SOC_DAPM_PRE_PMD:
